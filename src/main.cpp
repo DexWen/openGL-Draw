@@ -1,4 +1,4 @@
-#include <iostream>
+﻿#include <iostream>
 
 #include <glad/gl.h>
 #include <GLFW/glfw3.h>
@@ -58,13 +58,9 @@ int main() {
 		//清屏
 		glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		
+
 		//将存储在缓冲区中的像素颜色进行绘制，这里涉及到双缓冲的问题
 		glfwSwapBuffers(window);
-
-		// 渲染指令
-		//...
-
 		//检查有没有触发什么事件（键盘输入、鼠标移动等)、窗口改变
 		glfwPollEvents();
 	}

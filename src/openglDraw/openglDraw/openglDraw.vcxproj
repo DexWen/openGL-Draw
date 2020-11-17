@@ -73,6 +73,10 @@
     <IncludePath>F:\work\openGl\project\openGlLearning\include;F:\work\openGl\project\openGlLearning\deps;$(IncludePath)</IncludePath>
     <LibraryPath>F:\work\openGl\project\openGlLearning\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>F:\work\myGit\openGL-Draw\deps;F:\work\myGit\openGL-Draw\include;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\work\myGit\openGL-Draw\lib;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
