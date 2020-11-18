@@ -71,7 +71,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <IncludePath>F:\work\openGl\project\openGlLearning\include;F:\work\openGl\project\openGlLearning\deps;$(IncludePath)</IncludePath>
-    <LibraryPath>F:\work\openGl\project\openGlLearning\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>F:\work\openGl\project\openGlLearning\include;$(LibraryPath)</LibraryPath>
+    <ExecutablePath>F:\work\myGit\openGL-Draw\dll;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>F:\work\myGit\openGL-Draw\deps;F:\work\myGit\openGL-Draw\include;$(IncludePath)</IncludePath>
@@ -132,6 +133,7 @@
   <ItemGroup>
     <ClCompile Include="..\..\glad_gl.c" />
     <ClCompile Include="..\..\main.cpp" />
+    <ClCompile Include="..\..\texture.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -21,9 +21,9 @@ int main() {
 	glfwInit();		//初始化GLFW
 
 	//指明OpenGL版本
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	//glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
-	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	// glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	// glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	// glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	//创建窗口
 	GLFWwindow* window = glfwCreateWindow(800, 600, "OpenGLTest", NULL, NULL);
