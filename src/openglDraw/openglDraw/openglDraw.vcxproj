@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>F:\work\openGl\project\openGlLearning\include;F:\work\openGl\project\openGlLearning\deps;$(IncludePath)</IncludePath>
-    <LibraryPath>F:\work\openGl\project\openGlLearning\include;$(LibraryPath)</LibraryPath>
+    <IncludePath>F:\work\myGit\openGL-Draw\include;F:\work\myGit\openGL-Draw\deps;$(IncludePath)</IncludePath>
+    <LibraryPath>F:\work\myGit\openGL-Draw\lib;$(LibraryPath)</LibraryPath>
     <ExecutablePath>F:\work\myGit\openGL-Draw\dll;$(ExecutablePath)</ExecutablePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -87,6 +87,7 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
+      <AdditionalDependencies>glfw3.lib;glew32s.lib;opengl32.lib;FreeImage.lib;soil.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -132,7 +133,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\glad_gl.c" />
-    <ClCompile Include="..\..\main.cpp" />
+    <ClCompile Include="..\..\openGlDraw.cpp" />
     <ClCompile Include="..\..\texture.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

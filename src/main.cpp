@@ -19,7 +19,7 @@ void process_input_callabck(GLFWwindow *window, int key, int scancode, int actio
 
 int main() {
 	glfwInit();		//初始化GLFW
-
+	//glewExperimental = GL_TRUE;
 	//指明OpenGL版本
 	// glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
 	// glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);

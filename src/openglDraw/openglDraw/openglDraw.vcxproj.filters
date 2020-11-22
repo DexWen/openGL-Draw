@@ -18,7 +18,7 @@
     <ClCompile Include="..\..\glad_gl.c">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\main.cpp">
+    <ClCompile Include="..\..\openGlDraw.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="..\..\texture.cpp">

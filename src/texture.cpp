@@ -5,23 +5,18 @@
 
 // GLFW
 #include <GLFW/glfw3.h>
-#pragma comment(lib,"FreeImage.lib")
 
 // Other Libs
-#include "Shader.h"
-#include "FreeImage.h"
-
-using namespace std;
+#include <other/Shader.h>
+#include <SOIL/SOIL.h>
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
-
+using namespace std;
 // Window 尺寸
 const GLuint WIDTH = 800, HEIGHT = 600;
-int main()
-{
+int main(){
     //I初始化GLFW
     glfwInit();
-    FreeImage_Initialise(TRUE);//初始化FreeImage
 
     //设置全部GLFW要求的设置
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -81,37 +76,10 @@ int main()
 
     glBindVertexArray(0); // 解绑 VAO
 
-    // Load image, create texture and generate mipmaps 加载图像并且创建纹理和产生编码
-    //image format
-    FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
-
     int width, height;
-    FIBITMAP *dib(0);
 
-    // unsigned char* image = SOIL_load_image("container.jpg", &width, &height, 0, SOIL_LOAD_RGB);
-    //1 获取图片格式
-    FREE_IMAGE_FORMAT fifmt = FreeImage_GetFileType("F:/work/myGit/openGL-Draw/src/material/gtaBg.jpg", 0);
+    unsigned char* image = SOIL_load_image("F:/work/myGit/openGL-Draw/src/material/gtaBg.jpg", &width, &height, 0, SOIL_LOAD_RGB);
 
-    //2 加载图片
-
-    if(FreeImage_FIFSupportsReading(fifmt))
-        dib = FreeImage_Load(fifmt, "F:/work/myGit/openGL-Draw/src/material/gtaBg.jpg",0);
-    printf("bit: %d\n", FreeImage_GetBPP(dib));//灰度
-    printf("type: %d\n",FreeImage_GetImageType(dib));//返回类型
-    printf("bit: %d\n",FreeImage_GetColorsUsed(dib));//调色板的大小
-    printf("bit: %d\n",FreeImage_GetDIBSize(dib));//大小
-    //if the image failed to load, return failure
-    if(!dib)
-        cout<<55<<endl;
-    //3 转化为rgb 24色
-    dib = FreeImage_ConvertTo24Bits(dib);
-
-    //4 获取数据指针
-    BYTE *pixels = (BYTE*)FreeImage_GetBits(dib);
-
-
-    width = FreeImage_GetWidth(dib);
-    height = FreeImage_GetHeight(dib);
     cout<<"width:"<<width<<endl;
     cout<<"height:"<<height<<endl;
 
@@ -127,9 +95,8 @@ int main()
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pixels);
-    FreeImage_Unload(dib);
-    FreeImage_DeInitialise();
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, image);
+	SOIL_free_image_data(image);
     glGenerateMipmap(GL_TEXTURE_2D);
 
 
@@ -168,7 +135,7 @@ int main()
     glDeleteBuffers(1, &EBO);
     // Terminate GLFW, clearing any resources allocated by GLFW.
     glfwTerminate();
-    return 0;
+	return 0;
 }
 // Is called whenever a key is pressed/released via GLFW
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
