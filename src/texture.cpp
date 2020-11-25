@@ -5,10 +5,10 @@
 
 // GLFW
 #include <GLFW/glfw3.h>
-
+#pragma comment(lib,"FreeImage.lib")
 // Other Libs
 #include <other/Shader.h>
-#include <SOIL/SOIL.h>
+#include <FI/FreeImage.h>
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 using namespace std;
@@ -17,6 +17,7 @@ const GLuint VIEW_WIDTH = 800, VIEW_HEIGHT = 600;
 int main(){
     //I初始化GLFW
     glfwInit();
+	FreeImage_Initialise(TRUE);//初始化FreeImage
 
     //设置全部GLFW要求的设置
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -94,16 +95,44 @@ int main(){
 
     int width, height;
 
-    unsigned char* image = SOIL_load_image("F:/work/myGit/openGL-Draw/src/material/gtaBg.jpg", &width, &height, 0, SOIL_LOAD_RGB);
+    //unsigned char* image = SOIL_load_image("F:/work/myGit/openGL-Draw/src/material/gtaBg.jpg", &width, &height, 0, SOIL_LOAD_RGB);
+	//1 获取图片格式
+	const char* imagePath = "F:/work/myGit/openGL-Draw/src/material/gtaBg2.jpg";
+	FIBITMAP *dib(0);
+	FREE_IMAGE_FORMAT fifmt = FreeImage_GetFileType(imagePath, 0);
+	//2 加载图片
+	if (FreeImage_FIFSupportsReading(fifmt))
+		dib = FreeImage_Load(fifmt, imagePath, 0);
+	printf("bit: %d\n", FreeImage_GetBPP(dib));//灰度
+	printf("type: %d\n", FreeImage_GetImageType(dib));//返回类型
+	printf("bit: %d\n", FreeImage_GetColorsUsed(dib));//调色板的大小
+	printf("bit: %d\n", FreeImage_GetDIBSize(dib));//大小
+	  //if the image failed to load, return failure
+	if (!dib) {
+		printf("read Image Error");
+		return 0;
+	}
+		
+	//3 转化为rgb 24色
+	dib = FreeImage_ConvertTo24Bits(dib);
 
-    cout<<"width:"<<width<<endl;
-    cout<<"height:"<<height<<endl;
+	//4 获取数据指针
+	BYTE *pixels = (BYTE*)FreeImage_GetBits(dib);
 
+
+	width = FreeImage_GetWidth(dib);
+	height = FreeImage_GetHeight(dib);
+	cout << "width:" << width << endl;
+	cout << "height:" << height << endl;
 
     // 加载和创建纹理
     GLuint texture;
     glGenTextures(1, &texture);
     glBindTexture(GL_TEXTURE_2D, texture); // 设置为2D纹理
+
+    // glGetUniformLocation(ourShader.Program, "transform") 
+    // 获取Shaddr的片段着色器或者顶点着色器里面的参数 "transform"
+
     // Set the texture wrapping parameters  设置纹理包装参数
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
@@ -124,8 +153,12 @@ int main(){
     目前只有基本级别(Base-level)的纹理图像被加载了，如果要使用多级渐远纹理，我们必须手动设置所有不同的图像（不断递增第二个参数）。
     或者，直接在生成纹理之后调用glGenerateMipmap。这会为当前绑定的纹理自动生成所有需要的多级渐远纹理。*/
 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-	SOIL_free_image_data(image);
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pixels);
+
+	//SOIL_free_image_data(image);
+	FreeImage_Unload(dib);
+	FreeImage_DeInitialise();
+
     glGenerateMipmap(GL_TEXTURE_2D);
 
     glBindTexture(GL_TEXTURE_2D, 0); // 解除绑定的纹理
