@@ -15,8 +15,7 @@
 SpriteRenderer  *Renderer;
 
 
-Painter::Painter(GLuint width, GLuint height) 
-	: Keys(), Width(width), Height(height) 
+Painter::Painter(GLuint width, GLuint height): Keys(), Width(width), Height(height)
 { 
 
 }
@@ -29,15 +28,16 @@ Painter::~Painter()
 void Painter::Init()
 {
     // Load shaders
-    ResourceManager::LoadShader("shader/sprite.vs", "shader/sprite.frag", nullptr, "sprite");
+    ResourceManager::LoadShader("E:/myGit/openGL-Draw/src/shader/sprite.vs", "E:/myGit/openGL-Draw/src/shader/sprite.frag", nullptr, "sprite");
     // Configure shaders
     glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(this->Width), static_cast<GLfloat>(this->Height), 0.0f, -1.0f, 1.0f);
     ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
     ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
     // Load textures
-    ResourceManager::LoadTexture("textures/awesomeface.png", GL_TRUE, "face");
+    ResourceManager::LoadTexture("E:/myGit/openGL-Draw/src/material/gtaBg2.jpg", GL_TRUE, "bg");
     // Set render-specific controls
-    Renderer = new SpriteRenderer(ResourceManager::GetShader("sprite"));
+	Shader spShader = ResourceManager::GetShader("sprite");
+    Renderer = new SpriteRenderer(spShader);
 }
 
 void Painter::Update(GLfloat dt)
@@ -52,6 +52,7 @@ void Painter::ProcessInput(GLfloat dt)
 }
 
 void Painter::Render()
-{
-    Renderer->DrawSprite(ResourceManager::GetTexture("face"), glm::vec2(200, 200), glm::vec2(300, 400), 45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+{	
+	Texture2D bgShader = ResourceManager::GetTexture("bg");
+    Renderer->DrawSprite(bgShader, glm::vec2(200, 200), glm::vec2(300, 400), 45.0f, glm::vec3(0.0f, 1.0f, 0.0f));
 }

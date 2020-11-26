@@ -9,6 +9,7 @@
 #ifndef SPRITE_RENDERER_H
 #define SPRITE_RENDERER_H
 
+#define GLEW_STATIC
 #include <GL/glew.h>
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>

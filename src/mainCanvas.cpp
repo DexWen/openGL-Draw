@@ -7,12 +7,11 @@
 #include <GLFW/glfw3.h>
 #pragma comment(lib,"FreeImage.lib")
 // Other Libs
-#include <other/Shader.h>
+// #include <other/Shader.h>
 #include <FI/FreeImage.h>
 
 #include "painter.h"
 #include "resourceManager.h"
-
 
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 using namespace std;
@@ -25,7 +24,7 @@ const GLuint SCREEN_WIDTH = 800;
 // The height of the screen
 const GLuint SCREEN_HEIGHT = 600;
 
-Painter dexPainter(SCREEN_WIDTH, SCREEN_HEIGHT);
+Painter dexPainter (SCREEN_WIDTH, SCREEN_HEIGHT);
 
 int main(int argc, char *argv[])
 {
@@ -35,7 +34,7 @@ int main(int argc, char *argv[])
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
     glfwWindowHint(GLFW_RESIZABLE, GL_FALSE);
 
-    GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Breakout", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Dex-Painter-GOGOGO", nullptr, nullptr);
     glfwMakeContextCurrent(window);
 
     glewExperimental = GL_TRUE;
@@ -90,13 +89,13 @@ int main(int argc, char *argv[])
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode)
 {
     // When a user presses the escape key, we set the WindowShouldClose property to true, closing the application
-    if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
-        glfwSetWindowShouldClose(window, GL_TRUE);
-    if (key >= 0 && key < 1024)
-    {
-        if (action == GLFW_PRESS)
-            Breakout.Keys[key] = GL_TRUE;
-        else if (action == GLFW_RELEASE)
-            Breakout.Keys[key] = GL_FALSE;
-    }
+    // if (key == GLFW_KEY_ESCAPE && action == GLFW_PRESS)
+    //     glfwSetWindowShouldClose(window, GL_TRUE);
+    // if (key >= 0 && key < 1024)
+    // {
+    //     if (action == GLFW_PRESS)
+    //         dexPainter.Keys[key] = GL_TRUE;
+    //     else if (action == GLFW_RELEASE)
+	// 		dexPainter.Keys[key] = GL_FALSE;
+    // }
 }

@@ -8,6 +8,8 @@
 ******************************************************************/
 #include "resourceManager.h"
 
+#include  <direct.h>  
+#include  <stdio.h>
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -57,6 +59,7 @@ Shader ResourceManager::loadShaderFromFile(const GLchar *vShaderFile, const GLch
     std::string vertexCode;
     std::string fragmentCode;
     std::string geometryCode;
+
     try
     {
         // Open files
@@ -131,19 +134,6 @@ Texture2D ResourceManager::loadTextureFromFile(const GLchar *file, GLboolean alp
 	width = FreeImage_GetWidth(dib);
 	height = FreeImage_GetHeight(dib);
     printf("read width = %d, height = %d", width, height);
-
-    // Set the texture wrapping parameters  设置纹理包装参数
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);	// Set texture wrapping to GL_REPEAT (usually basic wrapping method)
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-    // Set texture filtering parameters  设置纹理过滤的参数
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_BGR_EXT, GL_UNSIGNED_BYTE, pixels);
-
-    // 加载和创建纹理
-    GLuint textureGL;
-    glGenTextures(1, &textureGL);
-    glBindTexture(GL_TEXTURE_2D, textureGL); // 设置为2D纹理
 
     // Now generate texture
     texture.Generate(width, height, pixels);
