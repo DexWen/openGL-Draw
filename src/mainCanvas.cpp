@@ -7,7 +7,6 @@
 #include <GLFW/glfw3.h>
 #pragma comment(lib,"FreeImage.lib")
 // Other Libs
-// #include <other/Shader.h>
 #include <FI/FreeImage.h>
 
 #include "painter.h"
@@ -20,9 +19,9 @@ using namespace std;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
 // The Width of the screen
-const GLuint SCREEN_WIDTH = 800;
+const GLuint SCREEN_WIDTH = 1280;
 // The height of the screen
-const GLuint SCREEN_HEIGHT = 600;
+const GLuint SCREEN_HEIGHT = 720;
 
 Painter dexPainter (SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -51,6 +50,7 @@ int main(int argc, char *argv[])
 
     // Initialize dexPainter
     dexPainter.Init();
+	std::cout << " ================" << glGetError() << std::endl; // 返回 0 (无错误)
 
     // DeltaTime variables
     GLfloat deltaTime = 0.0f;
@@ -59,9 +59,9 @@ int main(int argc, char *argv[])
     while (!glfwWindowShouldClose(window))
     {
         // Calculate delta time
-        GLfloat currentFrame = glfwGetTime();
-        deltaTime = currentFrame - lastFrame;
-        lastFrame = currentFrame;
+        // GLfloat currentFrame = glfwGetTime();
+        // deltaTime = currentFrame - lastFrame;
+        // lastFrame = currentFrame;
         glfwPollEvents();
 
         //deltaTime = 0.001f;
@@ -69,12 +69,13 @@ int main(int argc, char *argv[])
         //dexPainter.ProcessInput(deltaTime);
 
         // Update state
-        dexPainter.Update(deltaTime);
+        //dexPainter.Update(deltaTime);
 
         // Render
-        glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+        glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
         dexPainter.Render();
+		std::cout << " ========Render========" << glGetError() << std::endl; // 返回 0 (无错误)
 
         glfwSwapBuffers(window);
     }
