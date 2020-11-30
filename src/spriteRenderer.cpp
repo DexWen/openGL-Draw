@@ -37,7 +37,6 @@ void SpriteRenderer::DrawSprite(Texture2D &texture, glm::vec2 position, glm::vec
 
     // Render textured quad
     // this->shader.SetVector3f("spriteColor", color);
-
     glActiveTexture(GL_TEXTURE0);
     texture.Bind();
 	this->shader.Use();
@@ -92,7 +91,6 @@ void SpriteRenderer::initRenderData()
     glGenVertexArrays(1, &this->quadVAO);
     glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
-
 	glBindVertexArray(this->quadVAO);
 
     glBindBuffer(GL_ARRAY_BUFFER, VBO);
@@ -100,16 +98,14 @@ void SpriteRenderer::initRenderData()
 
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
-
-     // 位置属性 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)0);
     glEnableVertexAttribArray(0);
-    // 颜色属性
+
     glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(3 * sizeof(GLfloat)));
     glEnableVertexAttribArray(1);
-    // 纹理属性
+    
     glVertexAttribPointer(2, 2, GL_FLOAT, GL_FALSE, 8 * sizeof(GLfloat), (GLvoid*)(6 * sizeof(GLfloat)));
     glEnableVertexAttribArray(2);
 
-    glBindVertexArray(0); // 解绑 VAO
+    glBindVertexArray(0);
 }

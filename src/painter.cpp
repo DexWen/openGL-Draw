@@ -12,7 +12,7 @@
 
 
 // Painter-related State data
-SpriteRenderer  *Renderer;
+SpriteRenderer *Renderer;
 
 
 Painter::Painter(GLuint width, GLuint height): Keys(), Width(width), Height(height)

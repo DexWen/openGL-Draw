@@ -44,14 +44,12 @@ int main(int argc, char *argv[])
 
     // OpenGL configuration
     glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    glEnable(GL_CULL_FACE);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    // glEnable(GL_CULL_FACE);
+    // glEnable(GL_BLEND);
+    // glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     // Initialize dexPainter
     dexPainter.Init();
-	std::cout << " ================" << glGetError() << std::endl; // 返回 0 (无错误)
-
     // DeltaTime variables
     GLfloat deltaTime = 0.0f;
     GLfloat lastFrame = 0.0f;
@@ -74,8 +72,9 @@ int main(int argc, char *argv[])
         // Render
         glClearColor(0.2f, 0.3f, 0.3f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT);
+
         dexPainter.Render();
-		std::cout << " ========Render========" << glGetError() << std::endl; // 返回 0 (无错误)
+		// std::cout << " ========Render========" << glGetError() << std::endl;
 
         glfwSwapBuffers(window);
     }
