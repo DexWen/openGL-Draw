@@ -87,8 +87,10 @@ int main(int argc, char *argv[])
     glm::vec2 position = glm::vec2(SCREEN_WIDTH/2, SCREEN_HEIGHT/2);
     glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
 	glm::vec2 size = glm::vec2(400, 300);
-	GLfloat rotateAngle = 450.0f;
+	GLfloat rotateAngle = 0.0f;
 	GLfloat rotate = 3.141592f * rotateAngle / 180.0f;
+    glm::vec2 anchor = glm::vec2(0.0f, 0.2f);
+	glm::vec2 scale = glm::vec2(1.0f, 1.0f);
 
     while (!glfwWindowShouldClose(window))
     {
@@ -100,14 +102,14 @@ int main(int argc, char *argv[])
         glm::mat4 model = glm::mat4(1.0f);
         model = glm::translate(model, glm::vec3(position, 0.0f));
 
-		//rotate = (GLfloat)glfwGetTime() * 1.0f;
-		model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f));
-		model = glm::translate(model, glm::vec3(0.5f * size.x, 0.5f * size.y, 0.0f));
+		rotate = (GLfloat)glfwGetTime() * 1.0f;
+		model = glm::translate(model, glm::vec3(-anchor.x * size.x, -anchor.y * size.y, 0.0f));
+		model = glm::translate(model, glm::vec3(anchor.x * size.x, anchor.y * size.y, 0.0f));
         model = glm::rotate(model, rotate, glm::vec3(0.0f, 0.0f, 1.0f));
-		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
-        model = glm::translate(model, glm::vec3(-0.5f * size.x, -0.5f * size.y, 0.0f));
+		//model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
+        model = glm::translate(model, glm::vec3(-anchor.x * size.x, -anchor.y * size.y, 0.0f));
 
-        model = glm::scale(model, glm::vec3(size, 1.0f)); 
+        model = glm::scale(model, glm::vec3(size.x * scale.x, size.y * scale.y, 1.0f)); 
 		
         ourShader.SetMatrix4("model", model);
         ourShader.SetVector3f("spriteColor", color);
