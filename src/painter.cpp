@@ -30,11 +30,12 @@ void Painter::Init()
     // Load shaders
     ResourceManager::LoadShader("E:/myGit/openGL-Draw/src/shader/sprite.vs", "E:/myGit/openGL-Draw/src/shader/sprite.frag", nullptr, "sprite");
     // Configure shaders
-    glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(this->Width), static_cast<GLfloat>(this->Height), 0.0f, -1.0f, 1.0f);
+    glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(this->Width), 0.0f, static_cast<GLfloat>(this->Height), -1.0f, 1.0f);
     ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
     ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
     // Load textures
-    ResourceManager::LoadTexture("E:/myGit/openGL-Draw/src/material/logo.png", GL_TRUE, "bg");
+    ResourceManager::LoadTexture("E:/myGit/openGL-Draw/src/material/logo.png", GL_TRUE, "logo");
+    ResourceManager::LoadTexture("E:/myGit/openGL-Draw/src/material/gtaBg2.jpg", GL_TRUE, "gta");
     // Set render-specific controls
 	Shader spShader = ResourceManager::GetShader("sprite");
     Renderer = new SpriteRenderer(spShader);
@@ -53,7 +54,15 @@ void Painter::ProcessInput(GLfloat dt)
 
 void Painter::Render()
 {	
-	Texture2D bgTexture = ResourceManager::GetTexture("bg");
+	Texture2D bgTexture = ResourceManager::GetTexture("logo");
     // position size rotation color
-    Renderer->DrawSprite(bgTexture, glm::vec2(200, 200), glm::vec2(300, 400), 20.0f, glm::vec3(0.0f, 1.0f, 0.0f));
+    // texture, position, size, rotation, color, anchor, scale
+    glm::vec2 position = glm::vec2(this->Width/2, this->Height/2);
+    glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
+	glm::vec2 size = glm::vec2(bgTexture.Width, bgTexture.Height);
+	GLfloat rotateAngle = -45.0f;
+	GLfloat rotate = 3.141592f * rotateAngle / 180.0f;
+    glm::vec2 anchor = glm::vec2(1.0f, 0.5f);
+	glm::vec2 scale = glm::vec2(0.3f, 0.3f);
+    Renderer->DrawSprite(bgTexture, position, size, rotate, color, anchor, scale);
 }

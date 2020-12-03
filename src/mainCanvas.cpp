@@ -19,9 +19,9 @@ using namespace std;
 void key_callback(GLFWwindow* window, int key, int scancode, int action, int mode);
 
 // The Width of the screen
-const GLuint SCREEN_WIDTH = 800;
+const GLuint SCREEN_WIDTH = 1280;
 // The height of the screen
-const GLuint SCREEN_HEIGHT = 600;
+const GLuint SCREEN_HEIGHT = 720;
 
 Painter dexPainter (SCREEN_WIDTH, SCREEN_HEIGHT);
 
@@ -44,7 +44,7 @@ int main(int argc, char *argv[])
 
     // OpenGL configuration
     glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    glEnable(GL_CULL_FACE);
+    // glEnable(GL_CULL_FACE);
     // glCullFace(GL_BACK);
     // glFrontFace(GL_CCW);
     glEnable(GL_BLEND);
@@ -60,17 +60,17 @@ int main(int argc, char *argv[])
     while (!glfwWindowShouldClose(window))
     {
         // Calculate delta time
-        // GLfloat currentFrame = glfwGetTime();
-        // deltaTime = currentFrame - lastFrame;
-        // lastFrame = currentFrame;
+        GLfloat currentFrame = glfwGetTime();
+        deltaTime = currentFrame - lastFrame;
+        lastFrame = currentFrame;
         glfwPollEvents();
 
-        //deltaTime = 0.001f;
+        deltaTime = 0.001f;
         // Manage user input
-        //dexPainter.ProcessInput(deltaTime);
+        dexPainter.ProcessInput(deltaTime);
 
         // Update state
-        //dexPainter.Update(deltaTime);
+        dexPainter.Update(deltaTime);
 
         // Render
         glClearColor(0.1f, 0.2f, 0.3f, 1.0f);
