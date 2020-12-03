@@ -34,9 +34,9 @@ void Painter::Init()
     ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
     ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
     // Load textures
-    ResourceManager::LoadTexture("E:/myGit/openGL-Draw/src/material/logo.png", GL_TRUE, "logo");
-    ResourceManager::LoadTexture("E:/myGit/openGL-Draw/src/material/gtaBg2.jpg", GL_TRUE, "gta");
-    // Set render-specific controls
+	ResourceManager::LoadTexture("E:/myGit/openGL-Draw/src/material/gtaBg2.jpg", GL_TRUE, "logo");
+	ResourceManager::LoadTexture("E:/myGit/openGL-Draw/src/material/gtaBg.jpg", GL_TRUE, "logo2");
+	// Set render-specific controls
 	Shader spShader = ResourceManager::GetShader("sprite");
     Renderer = new SpriteRenderer(spShader);
 }

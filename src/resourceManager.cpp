@@ -100,29 +100,19 @@ Shader ResourceManager::loadShaderFromFile(const GLchar *vShaderFile, const GLch
 
 Texture2D ResourceManager::loadTextureFromFile(const GLchar *file, GLboolean alpha)
 {
-    // Create Texture object
     Texture2D texture;
     if (alpha)
     {
         texture.Internal_Format = GL_RGBA;
         texture.Image_Format = GL_RGBA;
     }
-    // Load image
     int width, height;
-    // unsigned char* image = SOIL_load_image(file, &width, &height, 0, texture.Image_Format == GL_RGBA ? SOIL_LOAD_RGBA : SOIL_LOAD_RGB);
 	FIBITMAP *dib(0);
 	FREE_IMAGE_FORMAT fifmt = FreeImage_GetFileType(file, 0);
-    //2 加载图片
     if (FreeImage_FIFSupportsReading(fifmt)) {
         texture.Internal_Format = fifmt;
         dib = FreeImage_Load(fifmt, file, 0);
     }
-
-    // printf("bit: %d\n", FreeImage_GetBPP(dib));//灰度
-    // printf("type: %d\n", FreeImage_GetImageType(dib));//返回类型
-    // printf("bit: %d\n", FreeImage_GetColorsUsed(dib));//调色板的大小
-    // printf("bit: %d\n", FreeImage_GetDIBSize(dib));//大小
-    //if the image failed to load, return failure
     if (!dib) {
         printf("[Resource Manager] read Image Error %s", file);
         return texture;
@@ -141,6 +131,5 @@ Texture2D ResourceManager::loadTextureFromFile(const GLchar *file, GLboolean alp
     texture.Generate(width, height, pixels);
     // And finally free image data
 	FreeImage_Unload(dib);
-	FreeImage_DeInitialise();
     return texture;
 }
