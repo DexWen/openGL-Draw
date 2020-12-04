@@ -118,8 +118,8 @@ Texture2D ResourceManager::loadTextureFromFile(const GLchar *file, GLboolean alp
         return texture;
     }
 
-    //3 转化为rgb 24色
-	dib = FreeImage_ConvertTo24Bits(dib);
+    //3 转化为rgba 32色
+	dib = FreeImage_ConvertTo32Bits(dib);
 	//4 获取数据指针
 	BYTE *pixels = (BYTE*)FreeImage_GetBits(dib);
 

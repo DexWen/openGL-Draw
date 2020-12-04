@@ -44,11 +44,12 @@ int main(int argc, char *argv[])
 
     // OpenGL configuration
     glViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
-    // glEnable(GL_CULL_FACE);
-    // glCullFace(GL_BACK);
+    //glEnable(GL_CULL_FACE);
+    //glCullFace(GL_BACK);
     // glFrontFace(GL_CCW);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    // glBlendEquation(GL_FUNC_ADD);
 
 
     // Initialize dexPainter
@@ -77,7 +78,6 @@ int main(int argc, char *argv[])
         glClear(GL_COLOR_BUFFER_BIT);
 
         dexPainter.Render();
-		// std::cout << " ========Render========" << glGetError() << std::endl;
 
         glfwSwapBuffers(window);
     }

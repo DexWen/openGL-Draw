@@ -20,7 +20,7 @@ SpriteRenderer::~SpriteRenderer()
     glDeleteVertexArrays(1, &this->quadVAO);
 }
 
-void SpriteRenderer::DrawSprite(Texture2D &texture, glm::vec2 position, glm::vec2 size, GLfloat rotate, glm::vec3 color, glm::vec2 anchor, glm::vec2 scale)
+void SpriteRenderer::DrawSprite(Texture2D &texture, glm::vec2 position, glm::vec2 size, GLfloat rotate, glm::vec4 color, glm::vec2 anchor, glm::vec2 scale)
 {
     // Prepare transformations
     this->shader.Use();
@@ -28,14 +28,14 @@ void SpriteRenderer::DrawSprite(Texture2D &texture, glm::vec2 position, glm::vec
 
     glm::vec2 newSize = glm::vec2(size.x * scale.x, size.y * scale.y);
     model = glm::translate(model, glm::vec3(position, 0.0f));
-    
+
     model = glm::rotate(model, rotate, glm::vec3(0.0f, 0.0f, 1.0f));
     model = glm::translate(model, glm::vec3(-anchor.x * newSize.x, -anchor.y * newSize.y, 0.0f));
 
     model = glm::scale(model, glm::vec3(newSize.x, newSize.y, 1.0f)); 
     
     this->shader.SetMatrix4("model", model);
-    this->shader.SetVector3f("spriteColor", color);
+    this->shader.SetVector4f("spriteColor", color);
 
     glActiveTexture(GL_TEXTURE0);
     texture.Bind();
@@ -62,6 +62,17 @@ void SpriteRenderer::initRenderData()
         1.0f,1.0f,1.0f,1.0f,
         1.0f,0.0f,1.0f,0.0f
     };
+
+    // 测试纹理环绕模式的VBO
+    /*
+    GLfloat vertices[] = { 
+        0.0f,1.0f,0.0f,1.2f,  // letf top 
+        1.0f,0.0f,1.2f,0.0f,  // right down
+        0.0f,0.0f,0.0f,0.0f,  // left down
+        0.0f,1.0f,0.0f,1.2f,  // 
+        1.0f,1.0f,1.2f,1.2f,
+        1.0f,0.0f,1.2f,0.0f
+    };*/
 
     glGenVertexArrays(1, &this->quadVAO);
     glGenBuffers(1, &VBO);

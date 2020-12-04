@@ -34,8 +34,8 @@ void Painter::Init()
     ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
     ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
     // Load textures
-	ResourceManager::LoadTexture("E:/myGit/openGL-Draw/src/material/gtaBg2.jpg", GL_TRUE, "logo");
-	ResourceManager::LoadTexture("E:/myGit/openGL-Draw/src/material/gtaBg.jpg", GL_TRUE, "logo2");
+	ResourceManager::LoadTexture("E:/myGit/openGL-Draw/src/material/gtaBg2.jpg", GL_TRUE, "bg");
+	ResourceManager::LoadTexture("E:/myGit/openGL-Draw/src/material/ui_victory.png", GL_TRUE, "logo");
 	// Set render-specific controls
 	Shader spShader = ResourceManager::GetShader("sprite");
     Renderer = new SpriteRenderer(spShader);
@@ -54,15 +54,27 @@ void Painter::ProcessInput(GLfloat dt)
 
 void Painter::Render()
 {	
-	Texture2D bgTexture = ResourceManager::GetTexture("logo");
+	Texture2D bgTexture = ResourceManager::GetTexture("bg");
     // position size rotation color
     // texture, position, size, rotation, color, anchor, scale
     glm::vec2 position = glm::vec2(this->Width/2, this->Height/2);
-    glm::vec3 color = glm::vec3(1.0f, 1.0f, 1.0f);
-	glm::vec2 size = glm::vec2(bgTexture.Width, bgTexture.Height);
-	GLfloat rotateAngle = -45.0f;
+    glm::vec4 color = glm::vec4(1.0f, 1.0f, 1.0f, 1.0f);
+	glm::vec2 size = glm::vec2(this->Width, this->Height);
+	GLfloat rotateAngle = 0.0f;
 	GLfloat rotate = 3.141592f * rotateAngle / 180.0f;
-    glm::vec2 anchor = glm::vec2(1.0f, 0.5f);
-	glm::vec2 scale = glm::vec2(0.3f, 0.3f);
+    glm::vec2 anchor = glm::vec2(0.5f, 0.5f);
+	glm::vec2 scale = glm::vec2(1.0f, 1.0f);
     Renderer->DrawSprite(bgTexture, position, size, rotate, color, anchor, scale);
+
+	Texture2D logoTexture = ResourceManager::GetTexture("logo");
+    // position size rotation color
+    // texture, position, size, rotation, color, anchor, scale
+    glm::vec2 position2 = glm::vec2(this->Width/2, this->Height/2);
+    glm::vec4 color2 = glm::vec4(1.0f, 1.0f, 1.0f, 0.8f);
+	glm::vec2 size2 = glm::vec2(logoTexture.Width, logoTexture.Height);
+	GLfloat rotateAngle2 = 0.0f;
+	GLfloat rotate2 = 3.141592f * rotateAngle / 180.0f;
+    glm::vec2 anchor2 = glm::vec2(0.5f, 0.5f);
+	glm::vec2 scale2 = glm::vec2(1.0f, 1.0f);
+    Renderer->DrawSprite(logoTexture, position2, size2, rotate2, color2, anchor2, scale2);
 }
