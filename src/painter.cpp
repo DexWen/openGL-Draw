@@ -1,4 +1,4 @@
-/*******************************************************************
+﻿/*******************************************************************
 ** This code is part of Breakout.
 **
 ** Breakout is free software: you can redistribute it and/or modify
@@ -35,7 +35,7 @@ void Painter::Init()
     ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
     // Load textures
 	ResourceManager::LoadTexture("../../material/gtaBg2.jpg", GL_TRUE, "bg");
-	ResourceManager::LoadTexture("../../material/ui_victory.png", GL_TRUE, "logo");
+	ResourceManager::LoadTexture("../../material/sun.jpg", GL_TRUE, "logo");
 	// Set render-specific controls
 	Shader spShader = ResourceManager::GetShader("sprite");
     Renderer = new SpriteRenderer(spShader);
@@ -67,10 +67,10 @@ void Painter::Render()
     Renderer->DrawSprite(bgTexture, position, size, rotate, color, anchor, scale);
 
 	Texture2D logoTexture = ResourceManager::GetTexture("logo");
-    // position size rotation color
+    // position size rotation colors
     // texture, position, size, rotation, color, anchor, scale
     glm::vec2 position2 = glm::vec2(this->Width/2, this->Height/2);
-    glm::vec4 color2 = glm::vec4(1.0f, 1.0f, 1.0f, 0.8f);
+    glm::vec4 color2 = glm::vec4(162.0f/255.0f, 205.0f/255.0f, 90.0f/255.0f, 1.0f);
 	glm::vec2 size2 = glm::vec2(logoTexture.Width, logoTexture.Height);
 	GLfloat rotateAngle2 = 0.0f;
 	GLfloat rotate2 = 3.141592f * rotateAngle / 180.0f;
