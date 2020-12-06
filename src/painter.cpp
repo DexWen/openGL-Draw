@@ -28,14 +28,14 @@ Painter::~Painter()
 void Painter::Init()
 {
     // Load shaders
-    ResourceManager::LoadShader("E:/myGit/openGL-Draw/src/shader/sprite.vs", "E:/myGit/openGL-Draw/src/shader/sprite.frag", nullptr, "sprite");
+    ResourceManager::LoadShader("../../shader/sprite.vs", "../../shader/sprite.frag", nullptr, "sprite");
     // Configure shaders
     glm::mat4 projection = glm::ortho(0.0f, static_cast<GLfloat>(this->Width), 0.0f, static_cast<GLfloat>(this->Height), -1.0f, 1.0f);
     ResourceManager::GetShader("sprite").Use().SetInteger("image", 0);
     ResourceManager::GetShader("sprite").SetMatrix4("projection", projection);
     // Load textures
-	ResourceManager::LoadTexture("E:/myGit/openGL-Draw/src/material/gtaBg2.jpg", GL_TRUE, "bg");
-	ResourceManager::LoadTexture("E:/myGit/openGL-Draw/src/material/ui_victory.png", GL_TRUE, "logo");
+	ResourceManager::LoadTexture("../../material/gtaBg2.jpg", GL_TRUE, "bg");
+	ResourceManager::LoadTexture("../../material/ui_victory.png", GL_TRUE, "logo");
 	// Set render-specific controls
 	Shader spShader = ResourceManager::GetShader("sprite");
     Renderer = new SpriteRenderer(spShader);

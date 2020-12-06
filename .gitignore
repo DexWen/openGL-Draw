@@ -4,3 +4,11 @@
 *.obj
 *.idb
 *.pdb
+*.db
+*.suo
+*.ipch
+*.vcxproj
+*.vcxproj.filters
+*.obj
+*.exe
+*.ilk
