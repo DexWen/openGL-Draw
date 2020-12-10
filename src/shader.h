@@ -26,7 +26,7 @@ public:
     // State
     GLuint ID; 
     // Constructor
-    Shader() { }
+    Shader() { };
     // Sets the current shader as active
     Shader  &Use();
     // Compiles the shader from given source code

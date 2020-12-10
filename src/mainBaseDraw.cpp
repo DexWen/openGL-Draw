@@ -15,6 +15,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
 using namespace std;
 // Window 尺寸
 const GLuint VIEW_WIDTH = 800, VIEW_HEIGHT = 600;
+/*
+  1. 测试最基本的加载图片和shader文件
+  2. 测试片段着色器的 texture 混色
+*/
 int main(){
     //I初始化GLFW
     glfwInit();
@@ -46,8 +50,8 @@ int main(){
         // 位置          // 颜色           // 纹理坐标
         1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 1.0f, // Top Right
         1.0f, -1.0f, 0.0f,   1.0f, 1.0f, 1.0f,   1.0f, 0.0f, // Bottom Right
-        -1.0f, -1.0f, 0.0f,   0.0f, 0.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
-        -1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 0.0f,   0.0f, 1.0f  // Top Left
+        -1.0f, -1.0f, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 0.0f, // Bottom Left
+        -1.0f,  1.0f, 0.0f,   1.0f, 1.0f, 1.0f,   0.0f, 1.0f  // Top Left
     };
     GLuint indices[] = {  // Note that we start from 0!
         0, 1, 3, // First Triangle
